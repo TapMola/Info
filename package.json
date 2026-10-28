@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
-    "test:browser": "node tests/browser.mjs"
+    "test:browser": "node tests/browser.mjs",
+    "check:dist": "node scripts/check-dist.mjs",
+    "test:production": "node tests/production.mjs"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.2.8",

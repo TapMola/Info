@@ -19,10 +19,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/configure-pages@v5
+      - name: Require GitHub Actions as the only Pages publishing source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)" != "workflow" ]; then
+            echo "::error::Pages must use Settings > Pages > Source: GitHub Actions. Branch publishing would overwrite dist with source files."
+            exit 1
+          fi
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - uses: actions/configure-pages@v5
+      - run: npm run check:dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:production
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

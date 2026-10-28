@@ -104,3 +104,22 @@ También puedes usar Chrome ya instalado con `CHROME_PATH=/ruta/al/ejecutable np
 Para regenerar la imagen social después de cambiar el hero: `GENERATE_SOCIAL=1 npm run test:browser`.
 
 Nota del entorno de desarrollo: el Node global de Homebrew presentaba una librería `simdjson` ausente. La compilación y las pruebas se ejecutaron con Node 22 instalado en `/opt/homebrew/opt/node@22/bin`. En ese equipo, usa `PATH=/opt/homebrew/opt/node@22/bin:$PATH npm run dev` si el Node por defecto sigue sin arrancar.
+
+## Prevención de la pantalla blanca en Pages
+
+Pages debe usar **Settings → Pages → Build and deployment → Source: GitHub Actions**. No debe publicar `main` desde `/`: esa opción sirve el `index.html` fuente, que referencia `/src/main.tsx`, y compite con el workflow que publica `dist/`. El incidente del 28 de octubre se confirmó con ese HTML en producción, un 404 en `/src/main.tsx` y dos workflows de Pages activos; la configuración API indicaba `build_type: legacy`.
+
+No hay React Router: las secciones usan anclas. `base: './'` sigue siendo válido para `/Info/`; no fue la causa de este incidente.
+
+El workflow comprueba el modo de publicación, instala con `npm ci`, ejecuta las pruebas y `tsc -b && vite build`, valida los recursos compilados y prueba la aplicación con Chromium usando Vite preview montado en `/Info/`. Solo después sube `dist/`. Cualquier fallo impide el despliegue. No se cambian el diseño ni las funcionalidades.
+
+Para verificar el build localmente:
+
+```sh
+npm run build
+npm run check:dist
+npx playwright install chromium # Si no tienes Chromium o Chrome instalado
+npm run test:production
+```
+
+`test:production` arranca y detiene `vite preview` automáticamente. Prueba escritorio y móvil, los recursos, el configurador, temas, precios, la demo NFC y la recarga con anclas, sin enviar pedidos. Para probar manualmente con el prefijo publicado, ejecuta `npm run preview -- --base /Info/` y abre `http://127.0.0.1:4173/Info/`. Para auditar una versión ya desplegada con el mismo test: `PRODUCTION_URL=https://tapmola.github.io/Info/ npm run test:production`.
