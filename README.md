@@ -4,7 +4,7 @@ Web editorial en español para tarjetas físicas NFC y perfiles digitales. React
 
 ## Desarrollo
 
-Necesitas Node.js **22.18 o posterior** y npm. Si utilizas nvm, ejecuta `nvm use` (incluimos `.nvmrc`).
+Necesitas Node.js **22.18 o posterior** y npm. Si utilizas nvm, ejecuta `nvm use` (incluimos `.nvmrc`). 
 
 ```sh
 npm install
