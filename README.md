@@ -97,6 +97,8 @@ npx playwright install chromium
 npm run test:browser
 ```
 
+La regresión específica del configurador se ejecuta con `node tests/configurator.mjs`. Comprueba columnas estables al añadir, escribir y quitar campos a 1920, 1440, 1280, 1024, 768, 390 y 375 px, con URLs y emails largos, y al redimensionar. Los casos de zoom al 125 % y 150 % emulan el ancho de viewport CSS y la relación de píxeles resultantes; no controlan el zoom nativo del navegador ni sustituyen una prueba en dispositivos físicos. `npm test` también audita que los componentes no contengan pictogramas Unicode.
+
 También puedes usar Chrome ya instalado con `CHROME_PATH=/ruta/al/ejecutable npm run test:browser`. El script cubre demo por botón y arrastre, reinicio, actualización del perfil, temas, logo y validación, precios, email preparado, menú móvil y movimiento reducido. Comprueba ausencia de desbordamiento horizontal a 320, 375, 390, 768, 1024 y 1440 px y errores de ejecución. Intercepta `window.open` para verificar Gmail **sin enviar datos ni pedidos**. Guarda capturas de escritorio y móvil en la carpeta temporal del sistema.
 
 Para regenerar la imagen social después de cambiar el hero: `GENERATE_SOCIAL=1 npm run test:browser`.

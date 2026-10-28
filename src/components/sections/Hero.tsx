@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowUpRight, MoveUpRight } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useReducedMotion } from 'motion/react';
+import { EditorialStar } from '../ui/EditorialStar';
 import { PhysicalCardMockup } from '../card/PhysicalCardMockup';
 export function Hero() {
     const reduced = useReducedMotion();
@@ -11,10 +12,10 @@ export function Hero() {
     return <section className="hero" id="inicio" aria-labelledby="hero-heading">
     <div className="hero-copy">
       <motion.p className="eyebrow" {...enter(.1)}><span className="small-line"/> CONEXIONES CON IDENTIDAD</motion.p>
-      <motion.h1 id="hero-heading" {...enter(.2)}>Una nueva<br />forma de<br /><em>conectar.</em><span className="heading-spark" aria-hidden="true">✳</span></motion.h1>
+      <motion.h1 id="hero-heading" {...enter(.2)}>Una nueva<br />forma de<br /><em>conectar.</em><span className="heading-spark" aria-hidden="true"><EditorialStar /></span></motion.h1>
       <motion.p className="hero-description" {...enter(.35)}>Una tarjeta física. Infinitas posibilidades<br className="desktop-break"/> para compartir quién eres.</motion.p>
       <motion.div className="hero-actions" {...enter(.45)}><a className="button button-dark" href="#personalizar">Diseña tu tarjeta<ArrowUpRight size={18}/></a><a className="text-link" href="#experiencia">Descubre cómo funciona<MoveUpRight size={16}/></a></motion.div>
-      <motion.div className="hero-note" {...enter(.55)}><span className="tiny-card" aria-hidden="true">↗</span><span>Física por fuera. Infinitas posibilidades por dentro.</span></motion.div>
+      <motion.div className="hero-note" {...enter(.55)}><span className="tiny-card" aria-hidden="true"><ArrowUpRight size={12} strokeWidth={1.2} /></span><span>Física por fuera. Infinitas posibilidades por dentro.</span></motion.div>
     </div>
     <motion.div className="hero-visual" {...enter(.15)} onPointerMove={e => { if (reduced || e.pointerType !== 'mouse')
         return; const r = e.currentTarget.getBoundingClientRect(); x.set(((e.clientX - r.left) / r.width - .5) * 6); y.set(-((e.clientY - r.top) / r.height - .5) * 6); }} onPointerLeave={() => { x.set(0); y.set(0); }}>

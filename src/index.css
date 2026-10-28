@@ -268,6 +268,8 @@ section[id] {
   letter-spacing:-.05em
 }
 .heading-spark {
+  display:block;
+  line-height:1;
   position:absolute;
   font-family:Georgia,serif;
   font-size:53px;
@@ -436,6 +438,7 @@ section[id] {
   letter-spacing:.01em
 }
 .physical-mark {
+  display:inline-flex;
   font-size:22px
 }
 .light-card {
@@ -728,6 +731,11 @@ section[id] {
   font-size:8px;
   font-weight:700
 }
+.phone-indicators {
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+}
 .phone-lock {
   position:absolute;
   inset:0;
@@ -956,12 +964,24 @@ section[id] {
   padding-bottom:110px;
   background:#eeeae1
 }
+/* Zero track minimums keep dynamic form content from resizing either column. */
 .customizer-layout {
   display:grid;
-  grid-template-columns:1.05fr 1fr;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
   gap:9vw;
   align-items:start;
   margin-top:65px
+}
+.customizer-layout > *,
+.customizer-form,
+.form-grid,
+.optional-fields,
+.optional-field,
+.field-menu,
+.field-menu > *,
+.custom-link-field,
+.custom-link-field > * {
+  min-width:0;
 }
 .form-section-header {
   display:flex;
@@ -985,7 +1005,7 @@ section[id] {
 }
 .form-grid {
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:23px 20px
 }
 .field {
@@ -999,6 +1019,9 @@ section[id] {
   color:#5c584e
 }
 .field input,.field textarea {
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
   width:100%;
   min-height:46px;
   border:1px solid #d0c9bb;
@@ -1122,7 +1145,7 @@ section[id] {
   overflow:hidden
 }
 .optional-field .field {
-  flex:1
+  flex:1 1 0%
 }
 .icon-button {
   background:none;
@@ -1150,7 +1173,7 @@ section[id] {
   background:#f7f5f0;
   border:1px solid #d8d2c7;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:5px 15px
 }
 .field-menu p {
@@ -1176,7 +1199,7 @@ section[id] {
 }
 .custom-link-field {
   display:grid;
-  grid-template-columns:1fr 1.4fr 17px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 17px;
   gap:10px;
   align-items:end
 }
@@ -1820,6 +1843,11 @@ section[id] {
 .footer-contact p {
   font-size:9px
 }
+.footer-bottom a {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
 .footer-bottom {
   border-top:1px solid #d8d2c7;
   padding-top:22px;
@@ -2211,14 +2239,14 @@ section[id] {
     padding-bottom:75px
   }
   .customizer-layout {
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:28px
   }
   .customizer-form {
     min-width:0
   }
   .form-grid {
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
     gap:20px
   }
   .form-section-header>span:last-child:not(:first-child) {
@@ -2252,10 +2280,10 @@ section[id] {
     font-size:6px
   }
   .field-menu {
-    grid-template-columns:1fr
+    grid-template-columns:minmax(0,1fr)
   }
   .custom-link-field {
-    grid-template-columns:1fr 17px
+    grid-template-columns:minmax(0,1fr) 17px
   }
   .custom-link-field .field:first-child {
     grid-column:1/-1
@@ -2628,12 +2656,12 @@ section[id] {
     font-size:76px
   }
   .customizer-layout {
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
     gap:45px;
     margin-top:38px
   }
   .form-grid {
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
     gap:20px
   }
   .form-section-header h3 {
@@ -2670,7 +2698,7 @@ section[id] {
     padding:10px 0
   }
   .field-menu {
-    grid-template-columns:1fr 1fr
+    grid-template-columns:repeat(2,minmax(0,1fr))
   }
   .field-menu button {
     font-size:11px;
@@ -2721,7 +2749,7 @@ section[id] {
     font-size:12px
   }
   .custom-link-field {
-    grid-template-columns:1fr 20px
+    grid-template-columns:minmax(0,1fr) 20px
   }
   .pricing-section {
     padding-top:65px;
