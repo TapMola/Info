@@ -20,7 +20,10 @@ try {
     let ready = false
     for (let i = 0; i < 100; i++) {
       if (serverError || preview.exitCode !== null) throw serverError || new Error(`Vite preview falló: ${output}`)
-      if (output.includes('Local:')) { ready = true; break }
+      try {
+        const response = await fetch(url, { signal: AbortSignal.timeout(1000) })
+        if (response.ok && preview.exitCode === null) { ready = true; break }
+      } catch { /* Preview may not be listening yet. */ }
       await setTimeout(100)
     }
     assert.ok(ready, `Vite preview no arrancó: ${output}`)
