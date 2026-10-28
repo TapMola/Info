@@ -73,7 +73,7 @@ Las escenas de producto **son representaciones ilustrativas**, no fotografías n
 - Revisión: `main`, commit `47c4027bd51facc8dd8324523bc6eae281563052`.
 - Se inspeccionaron `index.html`, `script.js`, el árbol de recursos, `img/imageNFC1.png` y `card_example/index.html`.
 - Se conservaron el modelo tarjeta NFC + perfil digital, campos y enlaces, precios, guardado de contacto y pedido por email. La referencia abría Gmail en escritorio y mailto en móvil; ahora el usuario elige explícitamente sin detección de dispositivo.
-- El acceso de lectura web a la referencia falló; se revisaron sus archivos fuente públicos directamente. No se inventan especificaciones físicas, política de envío, fiscalidad, suscripciones ni datos legales.
+- El acceso de lectura web a la referencia falló; se revisaron sus archivos fuente públicos directamente. No se inventan especificaciones físicas, política de envío, fiscalidad, suscripciones ni datos legales. 
 
 ## GitHub Pages
 
