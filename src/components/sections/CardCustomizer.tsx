@@ -14,6 +14,7 @@ export function CardCustomizer({ card, setCard, onSubmit }: {
 }) {
     const [active, setActive] = useState<OptionalField[]>([]);
     const [menu, setMenu] = useState(false);
+    const [previewExpanded, setPreviewExpanded] = useState(false);
     const [logoError, setLogoError] = useState('');
     const uploadRef = useRef<HTMLInputElement>(null);
     const generation = useRef(0);
@@ -72,9 +73,10 @@ export function CardCustomizer({ card, setCard, onSubmit }: {
       {menu && <div id="field-menu" className="field-menu"><p>¿Qué más quieres compartir?</p>{optionalFields.filter(f => !active.includes(f.key)).map(f => <button key={f.key} type="button" onClick={() => addField(f.key)}>{f.label}<Plus size={14}/></button>)}<button type="button" disabled={card.links.length >= 5} onClick={() => { setCard(c => ({ ...c, links: [...c.links, { id: crypto.randomUUID(), label: '', url: '' }] })); setMenu(false); }}>Otro enlace {card.links.length >= 5 ? '(máx. 5)' : ''}<Plus size={14}/></button></div>}
       <div className="theme-picker"><div className="form-section-header"><span>02</span><h3>Elige tu estilo digital</h3></div><div className="theme-options" role="group" aria-label="Estilo del perfil digital">{(Object.keys(themeLabels) as Theme[]).map(theme => <button type="button" key={theme} aria-pressed={card.theme === theme} onClick={() => update('theme', theme)} className={card.theme === theme ? 'selected' : ''}><span className={`theme-swatch swatch-${theme}`}>{card.theme === theme && <Check size={15}/>}</span>{themeLabels[theme]}</button>)}</div></div>
       <label className="field notes-field"><span>¿Algo más que debamos saber?</span><textarea maxLength={1000} rows={3} value={card.notes} placeholder="Preferencias de diseño, detalles, ideas…" onChange={e => update('notes', e.target.value)}/></label>
+      <fieldset className="mobile-quantity"><legend>Elige tus tarjetas</legend><div>{pricing.map(p => <button type="button" key={p.quantity} aria-pressed={card.quantity === p.quantity} onClick={() => setCard(c => ({ ...c, quantity: p.quantity }))}>{p.quantity} {p.quantity === 1 ? 'tarjeta' : 'tarjetas'} · {p.price} €{card.quantity === p.quantity && <Check size={14} />}</button>)}</div></fieldset>
       <p className="form-selection" aria-live="polite">Tu selección: {card.quantity} {card.quantity === 1 ? 'tarjeta' : 'tarjetas'} · {pricing.find(p => p.quantity === card.quantity)!.price} €</p><a className="text-link continue-link" href="#precios">Continúa y elige tus tarjetas<ArrowDown size={15}/></a>
     </form>
-    <aside className="preview-column"><div className="preview-topline"><span className="eyebrow">TU PERFIL, EN TIEMPO REAL</span><span className="live-dot"/></div><div className="preview-phone"><div className="preview-camera"/><DigitalCardPreview card={card}/></div><p className="preview-footnote">Así empieza tu próxima conexión.<br /><span>Vista orientativa. Confirmaremos el diseño final contigo.</span></p></aside>
+    <aside className="preview-column" data-expanded={previewExpanded}><div className="preview-topline"><span className="eyebrow">TU PERFIL, EN TIEMPO REAL</span><span className="live-dot"/></div><div className="preview-phone" id="customizer-profile-preview"><div className="preview-camera"/><DigitalCardPreview card={card}/></div><button type="button" className="mobile-preview-controls" aria-expanded={previewExpanded} aria-controls="customizer-profile-preview" onClick={() => setPreviewExpanded(expanded => !expanded)}>{previewExpanded ? 'Volver a vista compacta' : 'Ver perfil completo'}<ChevronDown size={16} /></button><p className="preview-footnote">Así empieza tu próxima conexión.<br /><span>Vista orientativa. Confirmaremos el diseño final contigo.</span></p></aside>
     </div>
   </section>;
 }

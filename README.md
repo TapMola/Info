@@ -123,3 +123,9 @@ npm run test:production
 ```
 
 `test:production` arranca y detiene `vite preview` automáticamente. Prueba escritorio y móvil, los recursos, el configurador, temas, precios, la demo NFC y la recarga con anclas, sin enviar pedidos. Para probar manualmente con el prefijo publicado, ejecuta `npm run preview -- --base /Info/` y abre `http://127.0.0.1:4173/Info/`. Para auditar una versión ya desplegada con el mismo test: `PRODUCTION_URL=https://tapmola.github.io/Info/ npm run test:production`.
+
+## Composición móvil
+
+Los ajustes de dirección de arte móvil están aislados en `src/mobile.css` y se aplican solo con `width < 768px`. Las reglas originales de escritorio permanecen en `src/index.css`. Se reutilizan las mismas secciones y la misma tarjeta digital: el hero adelanta la escena de producto; la vista previa del configurador aparece compacta sobre el formulario y puede ampliarse. No es fija ni tapa el teclado. El menú móvil incorpora su CTA y gestiona el foco al abrir y cerrar con Escape. Los iconos siguen siendo SVG.
+
+Con `npm run dev` activo, ejecuta `node tests/mobile.mjs` para comprobar 320, 360, 375, 390, 430, 560, 640 y 767 px, incluido el encuadre de las tarjetas, el menú, la vista previa, los campos, temas, cantidad y demo NFC. Comprueba también 768, 1024, 1440 y 1920 px. Para una comparación visual antes/después de futuros cambios, ejecuta primero `CAPTURE_BASELINE=1 node tests/mobile.mjs`; las referencias y las capturas se guardan en la carpeta temporal del sistema. La comparación tolera pequeñas variaciones del rasterizado SVG. Sin referencias locales, el script ejecuta las pruebas funcionales sin afirmar una igualdad visual no comprobada. No requiere nuevas dependencias.

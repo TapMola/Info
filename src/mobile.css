@@ -1,0 +1,229 @@
+/* Mobile art direction is isolated here. Existing desktop rules stay in index.css.
+   Only new mobile controls are hidden outside the mobile breakpoint. */
+.mobile-menu-cta,
+.mobile-preview-controls,
+.mobile-quantity { display: none; }
+
+@media (width < 768px) {
+  html { scroll-padding-top: 80px; }
+  .section-shell { padding-inline: 24px; }
+  .eyebrow { font-size: 8px; letter-spacing: .15em; }
+  .body-copy { font-size: 14px; line-height: 1.85; }
+  .button { min-height: 52px; font-size: 12px; }
+  .button:active { transform: translateY(1px); }
+
+  /* A quiet masthead; the principal action lives inside the menu. */
+  .navbar { height: 66px; padding-inline: 24px; }
+  .navbar .wordmark { font-size: 27px; }
+  .navbar > .nav-cta { display: none; }
+  .menu-toggle { width: 44px; height: 44px; padding: 10px; justify-content: center; }
+  .menu-toggle svg { width: 21px; stroke-width: 1.4; }
+  .mobile-nav {
+    top: 65px; padding-inline: 24px;
+    max-height: calc(100dvh - 66px); overflow-y: auto;
+    border-bottom: 1px solid var(--line); box-shadow: 0 14px 20px #25242108;
+  }
+  .mobile-nav a { font-size: 25px; padding-block: 12px; }
+  .mobile-nav a > svg { width: 16px; stroke-width: 1.2; }
+  .mobile-nav a.mobile-menu-cta {
+    display: flex; margin: 16px 0 24px; padding: 15px 18px;
+    font-family: var(--font-sans); font-size: 12px; border: 0;
+  }
+
+  /* Recompose the same DOM: eyebrow → title → still life → copy → action. */
+  .hero {
+    display: grid; grid-template-columns: minmax(0, 1fr);
+    padding: 97px 24px 42px; gap: 0; min-height: 0;
+  }
+  .hero-copy { display: contents; }
+  .hero-copy > .eyebrow { order: 1; margin: 0 0 19px; font-size: 7px; gap: 11px; }
+  .hero h1 {
+    order: 2; width: 100%; max-width: 540px;
+    font-size: clamp(62px, 18.6vw, 98px); line-height: .91; letter-spacing: -.045em;
+  }
+  .hero h1 br { display: block; }
+  .heading-spark { font-size: 32px; bottom: 4px; right: 2px; }
+  .hero-visual {
+    order: 3; margin: 24px 0 0; width: 100%; max-width: 490px;
+    height: clamp(282px, 85vw, 380px); min-height: 0;
+    aspect-ratio: auto; justify-self: end;
+  }
+  .editorial-scene { min-height: 0; height: calc(100% - 25px); }
+  .scene-wall { bottom: 25%; }
+  .scene-wood { top: 49%; }
+  .stone-block { width: 81%; height: 32%; left: 8%; top: 48%; }
+  .hero-card-front { width: min(76%, 310px); left: 10%; top: 32%; padding: 20px; }
+  .hero-card-back { width: min(71%, 290px); left: 23%; top: 14%; padding: 19px; }
+  .hero-visual .physical-top .wordmark { font-size: clamp(20px, 5.5vw, 28px); }
+  .hero-visual .physical-bottom { font-size: 7px; }
+  .hero-visual .physical-mark svg { width: 20px; }
+  .hero-visual .visual-caption { display: none; }
+  .visual-index { top: 16px; left: 17px; font-size: 6px; }
+  .hero-image-bottom {
+    position: static; height: 25px; align-items: center;
+    font-size: 5.5px; letter-spacing: .09em;
+  }
+  .hero-image-bottom span:last-child { gap: 5px; }
+  .hero-image-bottom svg { width: 10px; }
+  .hero-description { order: 4; margin: 21px 0 0; max-width: 310px; font-size: 13px; line-height: 1.8; }
+  .hero-description .desktop-break { display: none; }
+  .hero-actions { order: 5; margin: 21px 0 0; display: flex; flex-flow: row wrap; gap: 18px 22px; align-items: center; }
+  .hero-actions .button { min-width: 194px; padding: 16px 19px; }
+  .hero-actions .text-link { padding: 7px 0; font-size: 10px; }
+  .hero-note { order: 6; margin: 25px 0 0; font-size: 8px; gap: 10px; line-height: 1.6; }
+  .hero .scroll-cue, .hero-edition { display: none; }
+
+  /* A shorter second still life, followed by readable editorial copy. */
+  .product-section { padding-block: 48px 60px; gap: 32px; }
+  .product-visual { aspect-ratio: 1.3; min-height: 0; }
+  .product-visual .physical-card { width: 72%; padding: 23px; }
+  .product-image-label { left: 19px; bottom: 35px; font-size: 7px; }
+  .product-image-note { left: 19px; bottom: 17px; font-size: 7px; }
+  .product-copy .eyebrow { margin-bottom: 19px; }
+  .product-copy h2 { font-size: clamp(49px, 13.5vw, 70px); line-height: 1; margin-bottom: 23px; }
+  .feature { font-size: 11px; line-height: 1.6; padding-block: 17px; }
+  .compatibility-note { font-size: 10px; }
+
+  .demo-layout { padding-block: 60px 48px; gap: 28px; min-height: 0; }
+  .demo-copy h2 { font-size: clamp(65px, 17vw, 88px); line-height: .92; }
+  .demo-copy .body-copy { font-size: 13px; margin-top: 24px; }
+  .demo-copy .button { margin-top: 23px; }
+  .demo-disclaimer { font-size: 9px; max-width: 320px; }
+  .demo-stage { min-height: 540px; height: 540px; }
+  .demo-step { font-size: 7px; }
+  .demo-stage .phone { width: 232px; height: 480px; margin-left: 44px; transform: rotate(3deg); }
+  .demo-stage .phone-active { transform: rotate(0); }
+  .draggable-card { left: 0; top: 48%; }
+  .draggable-card .physical-card { width: 185px; padding: 17px; }
+  .draggable-card .physical-top .wordmark { font-size: 19px; }
+  .drag-label { font-size: 9px; width: 180px; top: calc(100% + 35px); }
+  .reset-demo { font-size: 11px; left: calc(50% + 22px); }
+
+  .how-section { padding-block: 60px; }
+  .section-heading-row { display: block; }
+  .section-heading-row h2 { font-size: clamp(50px, 13.7vw, 72px); }
+  .section-heading-row > p { margin-top: 20px; font-size: 12px; line-height: 1.85; }
+  .steps { display: block; margin-top: 34px; }
+  .steps li { margin-top: 28px; }
+  .steps li > div { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 0 18px; }
+  .step-number { grid-row: 1 / 3; font-size: 28px; }
+  .step-rule { display: none; }
+  .steps h3 { font-size: 31px; padding-top: 15px; border-top: 1px solid var(--line); margin-bottom: 10px; }
+  .steps p { max-width: 330px; font-size: 13px; line-height: 1.85; }
+
+  /* A compact version of the existing live card, never fixed over the keyboard. */
+  .customizer-section { padding-block: 60px; }
+  .customizer-section .section-heading-row h2 { font-size: clamp(65px, 18vw, 84px); }
+  .customizer-layout { grid-template-columns: minmax(0, 1fr); gap: 31px; margin-top: 29px; }
+  .preview-column { order: 1; position: static; padding: 0; border: 0; }
+  .customizer-form { order: 2; }
+  .preview-topline { justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+  .preview-topline .eyebrow { font-size: 8px; }
+  .preview-column[data-expanded="false"] .preview-phone { width: 100%; max-width: 100%; border: 0; padding: 0; border-radius: 0; box-shadow: none; background: transparent; }
+  .preview-column[data-expanded="false"] .preview-camera { display: none; }
+  .preview-column[data-expanded="false"] .digital-card { position: relative; min-height: 152px; border-radius: 0; }
+  .preview-column[data-expanded="false"] .digital-cover { position: absolute; inset: 0 0 0 auto; width: 24%; height: 100%; padding: 0; }
+  .preview-column[data-expanded="false"] .digital-cover > span:first-child { display: none; }
+  .preview-column[data-expanded="false"] .digital-inner { display: grid; grid-template-columns: 45px minmax(0, 1fr); gap: 4px 15px; align-content: center; min-height: 152px; padding: 20px; }
+  .preview-column[data-expanded="false"] .profile-logo { width: 45px; height: 45px; margin: 0; grid-column: 1; grid-row: 1 / 5; border-width: 3px; font-size: 23px; align-self: start; }
+  .preview-column[data-expanded="false"] .digital-card h3 { grid-column: 2; font-size: 31px; margin: 0; max-width: 290px; }
+  .preview-column[data-expanded="false"] .profile-location { grid-column: 2; margin: 0; font-size: 8px; }
+  .preview-column[data-expanded="false"] .profile-role,
+  .preview-column[data-expanded="false"] .profile-business { grid-column: 2; margin: 0; font-size: 10px; }
+  .preview-column[data-expanded="false"] .save-contact,
+  .preview-column[data-expanded="false"] .profile-contact,
+  .preview-column[data-expanded="false"] .preview-notice,
+  .preview-column[data-expanded="false"] .digital-footer,
+  .preview-column[data-expanded="false"] .preview-footnote { display: none; }
+  .mobile-preview-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; min-height: 44px; padding: 11px 0; border: 0; border-bottom: 1px solid #c9beac; background: none; font-size: 11px; text-align: left; }
+  .mobile-preview-controls svg { transition: transform .25s; }
+  .preview-column[data-expanded="true"] .mobile-preview-controls svg { transform: rotate(180deg); }
+  .preview-column[data-expanded="true"] .preview-phone { width: 305px; max-width: 100%; }
+  .preview-footnote { font-size: 10px; }
+  .form-section-header { margin-bottom: 21px; gap: 11px; }
+  .form-section-header h3 { font-size: 12px; }
+  .form-section-header > span:last-child:not(:first-child) { display: block; font-size: 8px; }
+  .form-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .field > span { font-size: 12px; }
+  .field input, .field textarea { min-height: 51px; padding: 14px 12px; font-size: 16px; }
+  .field input::placeholder, .field textarea::placeholder { font-size: 12px; }
+  .upload-label { min-height: 85px; padding: 19px 16px; }
+  .upload-label strong { font-size: 12px; }
+  .upload-label small { font-size: 9px; line-height: 1.7; }
+  .remove-logo { min-width: 44px; min-height: 44px; top: 19px; right: 3px; }
+  .field-help { font-size: 10px; }
+  .optional-field { gap: 5px; }
+  .icon-button { min-width: 44px; min-height: 44px; padding: 12px; }
+  .add-information { min-height: 44px; font-size: 12px; }
+  .field-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px; gap: 4px 14px; }
+  .field-menu p { font-size: 11px; }
+  .field-menu button { min-height: 44px; padding-block: 12px; font-size: 11px; }
+  .custom-link-field { grid-template-columns: minmax(0, 1fr) 44px; }
+  .custom-link-field .field:first-child { grid-column: 1 / -1; }
+  .theme-options { gap: 20px; }
+  .theme-options button { font-size: 11px; min-height: 67px; }
+  .theme-swatch { width: 70px; height: 45px; }
+  .mobile-quantity { display: block; min-width: 0; border: 0; padding: 0; margin: 25px 0 0; }
+  .mobile-quantity legend { padding: 0; margin-bottom: 12px; font-size: 12px; }
+  .mobile-quantity > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .mobile-quantity button { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 49px; border: 1px solid #bcb2a3; padding: 10px 7px; background: transparent; font-size: 11px; }
+  .mobile-quantity button[aria-pressed="true"] { border-color: #705742; background: #e8e0d4; }
+  .form-selection { font-size: 11px; margin-top: 17px; }
+  .continue-link { min-height: 44px; font-size: 12px; }
+
+  /* Pricing becomes two editorial rows instead of squeezed desktop columns. */
+  .pricing-section { padding-block: 60px; gap: 30px; }
+  .pricing-heading h2 { font-size: clamp(52px, 14vw, 72px); }
+  .pricing-heading > p:last-child { font-size: 12px; max-width: 310px; }
+  .pricing-options { display: flex; flex-direction: column; gap: 0; }
+  .price-option { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 18px; padding: 22px 0 0; background: transparent; }
+  .price-topline { grid-column: 1 / -1; flex-direction: row; font-size: 8px; min-height: 0; }
+  .price-option h3 { font-size: 22px; margin: 17px 0 5px; }
+  .price-amount { grid-column: 2; grid-row: 2 / 4; align-self: center; font-size: 62px; }
+  .price-amount span { font-size: 27px; }
+  .price-option p { grid-column: 1; max-width: 205px; font-size: 12px; margin: 9px 0 21px; line-height: 1.8; }
+  .price-choice { grid-column: 1 / -1; padding-block: 17px; min-height: 50px; font-size: 12px; margin: 0; }
+  .price-choice svg { width: 17px; }
+  .pricing-note { margin: 0; font-size: 10px; line-height: 1.85; }
+  .order-section { padding-block: 60px; gap: 32px; }
+  .order-intro h2 { font-size: 64px; }
+  .order-intro > p:not(.eyebrow) { font-size: 13px; }
+  .order-summary dl > div { font-size: 12px; gap: 17px; }
+  .summary-title > span { font-size: 7px; }
+  .order-disclaimer { font-size: 11px; }
+  .gmail-button { min-height: 48px; font-size: 11px; }
+  .order-prepared p { font-size: 12px; }
+  .final-cta { padding: 62px 24px; min-height: 460px; }
+  .final-cta h2 { font-size: clamp(41px, 11vw, 65px); line-height: 1.05; }
+  .final-cta p:not(.eyebrow) { font-size: 13px; }
+  .final-cta .eyebrow { font-size: 7px; }
+  .footer { padding-top: 43px; padding-bottom: 24px; }
+  .footer-main { gap: 27px 18px; padding-bottom: 30px; }
+  .footer-main nav { font-size: 12px; gap: 18px; }
+  .footer-main p { font-size: 12px; }
+  .footer-contact { grid-column: 1 / -1; }
+  .footer-contact > span { font-size: 8px; margin: 4px 0 12px; }
+  .footer-contact > a { font-size: 14px; }
+  .footer-contact p { font-size: 11px; margin-top: 12px; }
+  .footer-bottom { font-size: 9px; padding-top: 20px; }
+}
+
+@media (width < 360px) {
+  .hero { padding-inline: 20px; }
+  .hero h1 { font-size: 62px; }
+  .heading-spark { font-size: 27px; }
+  .hero-card-front { padding: 17px; }
+  .hero-card-back { padding: 16px; }
+  .hero-note { font-size: 7px; }
+  .hero-image-bottom { font-size: 5px; }
+  .demo-stage .phone { width: 218px; height: 456px; margin-left: 42px; }
+  .draggable-card .physical-card { width: 172px; }
+  .form-section-header { gap: 8px; }
+  .form-section-header h3 { font-size: 11px; }
+  .mobile-quantity button { font-size: 10px; gap: 5px; }
+}
+
+@media (width < 768px) and (hover: none) {
+  .button:hover { transform: none; }
+  .product-visual:hover .physical-card { transform: rotate(-19deg) translateY(-12px); }
+}
